@@ -1,0 +1,1 @@
+Use tile34 and 000 for idle.
