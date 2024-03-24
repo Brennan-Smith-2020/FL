@@ -1,6 +1,7 @@
 import pygame
 import sys
-from Main_stage.world_generator import generate_landscape
+from World_Generator.landscape_gen import generate_landscape
+from World_Generator.terrain_gen import generate_terrain
 from Player.player_load import loadPlayer
 
 
@@ -130,7 +131,7 @@ while running:
             button2_rect = pygame.Rect(130, button_start_y + button_height + button_spacing, button_width, button_height)
             button3_rect = pygame.Rect(130, button_start_y + 2 * (button_height + button_spacing), button_width, button_height)
 
-            # Fit to screen
+            # Fit to screen  
             generate_landscape(screen, grass_images, tree_images, rock_images)
 
         # Fill the screen with the color of the sky

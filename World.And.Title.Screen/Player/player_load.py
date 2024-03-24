@@ -1,6 +1,4 @@
 import time
-from title_screen import runLandscapeWrapper # circular import :/
-# fix it tmrw in order to "deblit" the player, or find another solution idk im tired
 
 player_path_idle_1 = 'Assets/Player/tile034.png'
 player_path_idle_2 = 'Assets/Player/tile000.png'
@@ -18,8 +16,6 @@ def loadPlayer(pygame, screen):
     # Display the player images
     screen.blit(player_idle_image_1, (100, 100))
     pygame.display.flip()
-    runLandscapeWrapper()
     time.sleep(0.7)
     screen.blit(player_idle_image_2, (100, 100))
     pygame.display.flip()
-    runLandscapeWrapper()
