@@ -1,7 +1,6 @@
 import pygame
 import sys
-from World_Generator.landscape_gen import generate_landscape
-from World_Generator.terrain_gen import generate_terrain
+from World_Generator.generate_world import generate_terrain
 from Player.player_load import loadPlayer
 
 
@@ -21,10 +20,6 @@ import os
 font_path = 'World.And.Title.Screen/fonts/antiquity-print.ttf'
 font_size = 40
 font = pygame.font.Font(font_path, font_size)
-
-
-# Get the absolute path of the current directory
-current_directory = os.path.dirname(__file__)
 
 # Define the paths to grass, tree, and rock images
 grass_images = [
@@ -132,7 +127,7 @@ while running:
             button3_rect = pygame.Rect(130, button_start_y + 2 * (button_height + button_spacing), button_width, button_height)
 
             # Fit to screen  
-            generate_landscape(screen, grass_images, tree_images, rock_images)
+            generate_terrain(screen, grass_images, tree_images, rock_images)
 
         # Fill the screen with the color of the sky
         if inTitleScreen:
@@ -170,7 +165,7 @@ while running:
                     # play()
                     screen.fill((0, 0, 0))
                     inTitleScreen = False
-                    generate_landscape(screen, grass_images, tree_images, rock_images)
+                    generate_terrain(screen, grass_images, tree_images, rock_images)
                     loadPlayer(pygame, screen)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -179,12 +174,6 @@ while running:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if button3_rect.collidepoint(mouse_x, mouse_y):
                     new_game()
-
-
-
-        # FUNC AREA
-        def runLandscapeWrapper():
-            generate_landscape(screen, grass_images, tree_images, rock_images)
 
         # Control the frame rate
         clock.tick(60)
