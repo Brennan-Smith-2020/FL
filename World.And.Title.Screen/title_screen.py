@@ -2,7 +2,7 @@ import pygame
 import sys
 from World_Generator.generate_world import generate_terrain
 from Player.player_load import loadPlayer
-
+from settings import sd, x, y
 
 inTitleScreen = True
 
@@ -115,6 +115,7 @@ while running:
             screen_width, screen_height = event.size
             if inTitleScreen:
                 screen.fill(sky_color)  # Fill with sky color on resize
+
             screen = pygame.display.set_mode((screen_width, screen_height), pygame.RESIZABLE)
             # Recreate scaled images on resize
             layer_images = [pygame.transform.scale(img, (screen_width, screen_height)) for img in layer_images]
@@ -127,11 +128,34 @@ while running:
             button3_rect = pygame.Rect(130, button_start_y + 2 * (button_height + button_spacing), button_width, button_height)
 
             # Fit to screen  
-            generate_terrain(screen, grass_images, tree_images, rock_images)
+            generate_terrain(screen, grass_images, tree_images, rock_images, sd)
 
         # Fill the screen with the color of the sky
         if inTitleScreen:
             screen.fill(sky_color)
+
+                    # Inside the main game loop, after handling resize event and before updating the display
+        if not inTitleScreen:
+            # Check for key presses
+            keys = pygame.key.get_pressed()
+            speed = 5  # Adjust the speed as needed
+
+            # Update player position based on key presses
+            if keys[pygame.K_LEFT]:
+                x -= speed
+            elif keys[pygame.K_RIGHT]:
+                x += speed
+            elif keys[pygame.K_UP]:
+                y -= speed
+            elif keys[pygame.K_DOWN]:
+                y += speed
+
+            # Redraw the player at the new position
+            screen.fill((0, 0, 0))  # Clear the screen
+            generate_terrain(screen, grass_images, tree_images, rock_images, sd)  # Redraw the terrain
+            loadPlayer(pygame, screen, x, y)  # Draw the player at the new position
+            pygame.display.flip()  # Update the display
+
 
         if inTitleScreen:
             for i, layer_speed in enumerate(layer_speeds):
@@ -165,8 +189,7 @@ while running:
                     # play()
                     screen.fill((0, 0, 0))
                     inTitleScreen = False
-                    generate_terrain(screen, grass_images, tree_images, rock_images)
-                    loadPlayer(pygame, screen)
+                    generate_terrain(screen, grass_images, tree_images, rock_images, sd)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if button2_rect.collidepoint(mouse_x, mouse_y):
