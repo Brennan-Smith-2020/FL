@@ -1,6 +1,8 @@
 import pygame
 import random
 
+
+## this may actually not be needed, delete file later
 def generate_terrain(screen, grass_images, tree_images, rock_images, seed=None):
     # Set the random seed if provided
     if seed is not None:

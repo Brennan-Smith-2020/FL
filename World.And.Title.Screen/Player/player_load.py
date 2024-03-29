@@ -1,6 +1,6 @@
 import time
-from settings import sd
 from World_Generator.generate_world import generate_terrain
+from World_Generator.dungeonSpawnA1 import generate_D0A0
 
 # Define the paths to grass, tree, and rock images
 grass_images = [

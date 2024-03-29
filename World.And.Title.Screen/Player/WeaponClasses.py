@@ -7,7 +7,8 @@ class FirstSword: # Found in begining of game
         self.attack_speed = 2 # Can fit 2 attacks in a second
 
     def useAtkCooldown(self):
-        time.sleep(1/self.attack_speed)
+        #time.sleep(1/self.attack_speed)
+        pass
 
 class WpnPlaceHolder1: # Placeholder weapon, cant be picked up
     def __init__(self, damage, range, attack_speed):
@@ -16,4 +17,5 @@ class WpnPlaceHolder1: # Placeholder weapon, cant be picked up
         self.attack_speed = 1 # Can fit 1 attacks in a second
 
     def useAtkCooldown(self):
-        time.sleep(1/self.attack_speed)
+        #time.sleep(1/self.attack_speed)
+        pass

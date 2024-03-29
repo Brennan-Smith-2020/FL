@@ -1,8 +1,9 @@
 import pygame
 import sys
 from World_Generator.generate_world import generate_terrain
+from World_Generator.dungeonSpawnA1 import generate_D0A0
 from Player.player_load import loadPlayer
-from settings import sd, x, y
+from settings import x, y
 
 inTitleScreen = True
 
@@ -40,6 +41,17 @@ tree_images = [
     "Assets/Grass And Road Tiles/Grass And Road Tiles/Tiles/Tree - 1.png",
 ]
 
+# Define dungen tiles
+dungeonFloor = [
+    "Assets/Dungeon Tiles/Dungeon Tiles/Tiles/1.png",
+    "Assets/Dungeon Tiles/Dungeon Tiles/Tiles/2.png",
+    "Assets/Dungeon Tiles/Dungeon Tiles/Tiles/3.png",
+]
+
+dungeonDoor = [
+    "Assets/Dungeon Tiles/Dungeon Tiles/Tiles/26.png",
+]
+
 # Load images for different layers
 layer_images = [
     pygame.image.load("World.And.Title.Screen/ParallaxBackground/ParallaxBackground/Sky.png").convert_alpha(),
@@ -75,7 +87,7 @@ text_x = (screen_width - text_render_title.get_width()) // 2
 text_y = screen_height - 100
 
 # Set up layer scroll speeds
-layer_speeds = [0.1, 0.2, 0.3, 0.4, 0.5]  # Adjust as needed
+layer_speeds = [0.5, 0.6, 0.7, 0.8, 0.9]  # Adjust as needed
 
 # Main game loop
 running = True
@@ -128,7 +140,8 @@ while running:
             button3_rect = pygame.Rect(130, button_start_y + 2 * (button_height + button_spacing), button_width, button_height)
 
             # Fit to screen  
-            generate_terrain(screen, grass_images, tree_images, rock_images, sd)
+            #generate_terrain(screen, grass_images, tree_images, rock_images, sd)
+            generate_D0A0(screen, dungeonFloor, dungeonDoor)
 
         # Fill the screen with the color of the sky
         if inTitleScreen:
@@ -152,7 +165,9 @@ while running:
 
             # Redraw the player at the new position
             screen.fill((0, 0, 0))  # Clear the screen
-            generate_terrain(screen, grass_images, tree_images, rock_images, sd)  # Redraw the terrain
+            # generate_terrain(screen, grass_images, tree_images, rock_images, sd)  # Redraw the terrain
+            
+            generate_D0A0(screen, dungeonFloor, dungeonDoor)
             loadPlayer(pygame, screen, x, y)  # Draw the player at the new position
             pygame.display.flip()  # Update the display
 
@@ -189,7 +204,7 @@ while running:
                     # play()
                     screen.fill((0, 0, 0))
                     inTitleScreen = False
-                    generate_terrain(screen, grass_images, tree_images, rock_images, sd)
+                    generate_D0A0(screen, dungeonFloor, dungeonDoor)
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if button2_rect.collidepoint(mouse_x, mouse_y):
